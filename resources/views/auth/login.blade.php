@@ -1,6 +1,9 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
-        <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="mx-auto h-12 w-auto">
+        <div class="flex items-center justify-center gap-3">
+            <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-12 w-auto">
+            <img src="{{ asset('images/WCL_logo.png') }}" alt="WCL Logo" class="h-12 w-auto">
+        </div>
         <h1 class="mt-4 font-display text-2xl font-bold tracking-tight text-slate-900">Admin sign in</h1>
         <p class="mt-1 text-sm text-slate-500">Access the recruitment console.</p>
     </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCvApplicationRequest;
 use App\Models\CvApplication;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ApplicationController extends Controller
@@ -58,5 +59,22 @@ class ApplicationController extends Controller
         return redirect()
             ->route('admin.applications.show', $application)
             ->with('status', 'Application updated successfully.');
+    }
+
+    public function destroy(CvApplication $application): RedirectResponse
+    {
+        if ($application->photo_path) {
+            Storage::disk('public')->delete($application->photo_path);
+        }
+
+        if ($application->nrc_file_path) {
+            Storage::disk('public')->delete($application->nrc_file_path);
+        }
+
+        $application->delete();
+
+        return redirect()
+            ->route('admin.applications.index')
+            ->with('status', 'Application deleted successfully.');
     }
 }

@@ -40,6 +40,7 @@ Route::middleware(['auth', 'verified', 'admin'])
         Route::get('/applications', [AdminApplicationController::class, 'index'])->name('applications.index');
         Route::get('/applications/{application}', [AdminApplicationController::class, 'show'])->name('applications.show');
         Route::patch('/applications/{application}', [AdminApplicationController::class, 'update'])->name('applications.update');
+        Route::delete('/applications/{application}', [AdminApplicationController::class, 'destroy'])->name('applications.destroy');
 
         Route::get('/applications/{application}/files/{type}', [ApplicationFileController::class, 'show'])
             ->where('type', 'photo|nrc')

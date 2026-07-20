@@ -67,6 +67,7 @@
                         <tr>
                             <th scope="col" class="px-5 sm:px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Reference</th>
                             <th scope="col" class="px-5 sm:px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Applicant</th>
+                            <th scope="col" class="hidden lg:table-cell px-5 sm:px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Position</th>
                             <th scope="col" class="hidden lg:table-cell px-5 sm:px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">NRC</th>
                             <th scope="col" class="hidden md:table-cell px-5 sm:px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Contact</th>
                             <th scope="col" class="px-5 sm:px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">Status</th>
@@ -91,6 +92,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td class="hidden lg:table-cell px-5 sm:px-6 py-3 text-sm text-slate-700">{{ $app->position_applied }}</td>
                                 <td class="hidden lg:table-cell px-5 sm:px-6 py-3 text-sm text-slate-600 font-mono">{{ $app->nrc }}</td>
                                 <td class="hidden md:table-cell px-5 sm:px-6 py-3 text-sm">
                                     <a href="mailto:{{ $app->email }}" class="block text-slate-700 hover:text-brand-700 transition-colors duration-200 truncate max-w-[200px]">{{ $app->email }}</a>

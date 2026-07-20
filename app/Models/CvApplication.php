@@ -35,6 +35,12 @@ class CvApplication extends Model
     protected $fillable = [
         'reference',
         'name',
+        'position_applied',
+        'date_of_birth',
+        'education_level',
+        'current_employer',
+        'current_job_title',
+        'expected_salary',
         'nrc',
         'address',
         'email',
@@ -42,7 +48,15 @@ class CvApplication extends Model
         'photo_path',
         'nrc_file_path',
         'work_experience',
+        'skills',
+        'languages',
         'education',
+        'start_date',
+        'emergency_contact_name',
+        'emergency_contact_relationship',
+        'emergency_contact_phone',
+        'portfolio_url',
+        'references',
         'why_join_wta',
         'status',
         'admin_notes',
@@ -53,6 +67,9 @@ class CvApplication extends Model
     protected function casts(): array
     {
         return [
+            'date_of_birth' => 'date',
+            'start_date' => 'date',
+            'expected_salary' => 'decimal:2',
             'reviewed_at' => 'datetime',
         ];
     }

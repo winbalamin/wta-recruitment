@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -11,7 +12,10 @@ return new class extends Migration
 
         if ($driver === 'mysql' || $driver === 'mariadb') {
             DB::statement('ALTER TABLE cv_applications MODIFY COLUMN reference VARCHAR(20)');
-            DB::statement('CREATE UNIQUE INDEX cv_applications_reference_unique ON cv_applications (reference)');
+
+            if (! Schema::hasIndex('cv_applications', 'cv_applications_reference_unique')) {
+                DB::statement('CREATE UNIQUE INDEX cv_applications_reference_unique ON cv_applications (reference)');
+            }
         } elseif ($driver === 'sqlite') {
             // SQLite ignores most ALTER MODIFY; tests use a fresh in-memory DB so this is a no-op.
         } else {

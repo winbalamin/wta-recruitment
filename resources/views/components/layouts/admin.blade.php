@@ -19,7 +19,10 @@
         <div class="container flex items-center justify-between h-16">
             <div class="flex items-center gap-6">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-9 w-auto">
+                    <div class="flex items-center gap-2">
+                        <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-9 w-auto">
+                        <img src="{{ asset('images/WCL_logo.png') }}" alt="WCL Logo" class="h-9 w-auto">
+                    </div>
                     <div class="hidden sm:flex flex-col leading-tight">
                         <span class="font-display text-sm font-semibold text-slate-900">WTA Admin</span>
                         <span class="text-[10px] uppercase tracking-wider text-slate-400">Recruitment Console</span>

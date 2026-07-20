@@ -16,7 +16,10 @@
         <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
             <div class="container flex items-center justify-between h-16">
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-9 w-auto">
+                    <div class="flex items-center gap-2">
+                        <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-9 w-auto">
+                        <img src="{{ asset('images/WCL_logo.png') }}" alt="WCL Logo" class="h-9 w-auto">
+                    </div>
                     <span class="font-display text-base font-semibold">{{ config('app.name', 'WTA Recruitment') }}</span>
                 </a>
                 <div class="flex items-center gap-2 text-sm">

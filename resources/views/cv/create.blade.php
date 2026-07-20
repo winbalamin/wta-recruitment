@@ -21,8 +21,9 @@
             </svg>
         </div>
         <div class="container relative py-12 sm:py-16 text-center">
-            <div class="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white mb-6 ring-1 ring-white/30 shadow-lg p-2">
-                <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-14 w-14 sm:h-16 sm:w-16">
+            <div class="inline-flex items-center justify-center gap-2 h-20 sm:h-24 rounded-2xl bg-white mb-6 ring-1 ring-white/30 shadow-lg p-3">
+                <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-14 w-auto sm:h-16">
+                <img src="{{ asset('images/WCL_logo.png') }}" alt="WCL Logo" class="h-14 w-auto sm:h-16">
             </div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900" style="color: white; font-weight: bold;"~~>Join the WTA Team</h1>
             <p class="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto" style="color: white; font-weight: bold;">
@@ -34,9 +35,9 @@
                 @php
                     $steps = [
                         ['label' => 'Personal', 'active' => true],
+                        ['label' => 'Professional', 'active' => false],
                         ['label' => 'Documents', 'active' => false],
                         ['label' => 'Background', 'active' => false],
-                        ['label' => 'Review', 'active' => false],
                     ];
                 @endphp
                 @foreach($steps as $i => $step)
@@ -103,16 +104,85 @@
                             @error('name') <p class="error-text" role="alert">{{ $message }}</p> @enderror
                         </div>
 
-                        <div>
-                            <label for="nrc" class="label">NRC number <span class="text-red-500" aria-hidden="true">*</span></label>
-                            <input id="nrc" type="text" name="nrc" value="{{ old('nrc') }}" required maxlength="60"
-                                   placeholder="e.g. 12/ABC(N)123456"
+                        <div class="sm:col-span-2">
+                            <label for="position_applied" class="label">Position applied for <span class="text-red-500" aria-hidden="true">*</span></label>
+                            <input id="position_applied" type="text" name="position_applied" value="{{ old('position_applied') }}" required maxlength="120"
+                                   placeholder="e.g. Sales Executive, Web Developer"
                                    aria-required="true"
-                                   aria-invalid="{{ $errors->has('nrc') ? 'true' : 'false' }}"
-                                   class="input {{ $errors->has('nrc') ? 'input-invalid' : '' }}">
-                            @error('nrc') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                                   aria-invalid="{{ $errors->has('position_applied') ? 'true' : 'false' }}"
+                                   class="input {{ $errors->has('position_applied') ? 'input-invalid' : '' }}">
+                            @error('position_applied') <p class="error-text" role="alert">{{ $message }}</p> @enderror
                         </div>
 
+                        <div>
+                            <label for="date_of_birth" class="label">Date of birth <span class="text-red-500" aria-hidden="true">*</span></label>
+                            <input id="date_of_birth" type="date" name="date_of_birth" value="{{ old('date_of_birth') }}" required
+                                   aria-required="true"
+                                   aria-invalid="{{ $errors->has('date_of_birth') ? 'true' : 'false' }}"
+                                   class="input {{ $errors->has('date_of_birth') ? 'input-invalid' : '' }}">
+                            @error('date_of_birth') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="education_level" class="label">Highest education level <span class="text-red-500" aria-hidden="true">*</span></label>
+                            <select id="education_level" name="education_level" required
+                                    aria-required="true"
+                                    aria-invalid="{{ $errors->has('education_level') ? 'true' : 'false' }}"
+                                    class="input {{ $errors->has('education_level') ? 'input-invalid' : '' }}">
+                                <option value="" disabled {{ old('education_level') ? '' : 'selected' }}>Select level</option>
+                                <option value="High School" {{ old('education_level') == 'High School' ? 'selected' : '' }}>High School</option>
+                                <option value="Diploma" {{ old('education_level') == 'Diploma' ? 'selected' : '' }}>Diploma</option>
+                                <option value="Bachelor" {{ old('education_level') == 'Bachelor' ? 'selected' : '' }}>Bachelor</option>
+                                <option value="Master" {{ old('education_level') == 'Master' ? 'selected' : '' }}>Master</option>
+                                <option value="PhD" {{ old('education_level') == 'PhD' ? 'selected' : '' }}>PhD</option>
+                                <option value="Other" {{ old('education_level') == 'Other' ? 'selected' : '' }}>Other</option>
+                            </select>
+                            @error('education_level') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="label">NRC number <span class="text-red-500" aria-hidden="true">*</span></label>
+                        <div class="flex flex-row gap-2">
+                            <select id="nrc_state" name="nrc_state" required
+                                    aria-label="NRC state number"
+                                    aria-required="true"
+                                    aria-invalid="{{ $errors->has('nrc') ? 'true' : 'false' }}"
+                                    class="w-20 input {{ $errors->has('nrc') ? 'input-invalid' : '' }}">
+                                <option value="" disabled {{ old('nrc_state') ? '' : 'selected' }}>State</option>
+                                @foreach($nrcStates as $state)
+                                    <option value="{{ $state }}" {{ old('nrc_state') == $state ? 'selected' : '' }}>{{ $state }}</option>
+                                @endforeach
+                            </select>
+
+                            <select id="nrc_township" name="nrc_township" required
+                                    aria-label="NRC township code"
+                                    aria-required="true"
+                                    aria-invalid="{{ $errors->has('nrc') ? 'true' : 'false' }}"
+                                    class="w-25 input {{ $errors->has('nrc') ? 'input-invalid' : '' }}">
+                                <option value="" disabled {{ old('nrc_township') ? '' : 'selected' }}>Township</option>
+                            </select>
+
+                            <select id="nrc_type" name="nrc_type" required
+                                    aria-label="NRC type"
+                                    aria-required="true"
+                                    aria-invalid="{{ $errors->has('nrc') ? 'true' : 'false' }}"
+                                    class="w-20 input {{ $errors->has('nrc') ? 'input-invalid' : '' }}">
+                                <option value="" disabled {{ old('nrc_type') ? '' : 'selected' }}>Type</option>
+                                <option value="N" {{ old('nrc_type') == 'N' ? 'selected' : '' }}>(N)</option>
+                                <option value="P" {{ old('nrc_type') == 'P' ? 'selected' : '' }}>(P)</option>
+                                <option value="E" {{ old('nrc_type') == 'E' ? 'selected' : '' }}>(E)</option>
+                            </select>
+
+                            <input id="nrc_number" type="text" name="nrc_number" value="{{ old('nrc_number') }}"
+                                   inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required
+                                   aria-label="NRC registration number"
+                                   aria-required="true"
+                                   aria-invalid="{{ $errors->has('nrc') ? 'true' : 'false' }}"
+                                   placeholder="123456"
+                                   class="w-28 input {{ $errors->has('nrc') ? 'input-invalid' : '' }}">
+                        </div>
+                        @error('nrc') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                    </div>
                         <div class="sm:col-span-2">
                             <label for="address" class="label">Address <span class="text-red-500" aria-hidden="true">*</span></label>
                             <textarea id="address" name="address" rows="2" required maxlength="1000"
@@ -142,13 +212,107 @@
                                    class="input {{ $errors->has('phone') ? 'input-invalid' : '' }}">
                             @error('phone') <p class="error-text" role="alert">{{ $message }}</p> @enderror
                         </div>
+
+                        <div>
+                            <label for="emergency_contact_name" class="label">Emergency contact name <span class="text-red-500" aria-hidden="true">*</span></label>
+                            <input id="emergency_contact_name" type="text" name="emergency_contact_name" value="{{ old('emergency_contact_name') }}" required maxlength="120"
+                                   aria-required="true"
+                                   aria-invalid="{{ $errors->has('emergency_contact_name') ? 'true' : 'false' }}"
+                                   class="input {{ $errors->has('emergency_contact_name') ? 'input-invalid' : '' }}">
+                            @error('emergency_contact_name') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="emergency_contact_relationship" class="label">Relationship <span class="text-red-500" aria-hidden="true">*</span></label>
+                            <input id="emergency_contact_relationship" type="text" name="emergency_contact_relationship" value="{{ old('emergency_contact_relationship') }}" required maxlength="40"
+                                   placeholder="e.g. Parent, Spouse"
+                                   aria-required="true"
+                                   aria-invalid="{{ $errors->has('emergency_contact_relationship') ? 'true' : 'false' }}"
+                                   class="input {{ $errors->has('emergency_contact_relationship') ? 'input-invalid' : '' }}">
+                            @error('emergency_contact_relationship') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="emergency_contact_phone" class="label">Emergency contact phone <span class="text-red-500" aria-hidden="true">*</span></label>
+                            <input id="emergency_contact_phone" type="tel" name="emergency_contact_phone" value="{{ old('emergency_contact_phone') }}" required maxlength="40"
+                                   placeholder="+95 9 123 456 789"
+                                   aria-required="true"
+                                   aria-invalid="{{ $errors->has('emergency_contact_phone') ? 'true' : 'false' }}"
+                                   class="input {{ $errors->has('emergency_contact_phone') ? 'input-invalid' : '' }}">
+                            @error('emergency_contact_phone') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+                </fieldset>
+
+                {{-- Section: Professional --}}
+                <fieldset>
+                    <legend class="font-display text-lg font-semibold text-slate-900 flex items-center gap-2">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold">2</span>
+                        Professional
+                    </legend>
+                    <p class="mt-1 text-sm text-slate-500">Tell us about your current role and expectations.</p>
+
+                    <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="current_employer" class="label">Current employer</label>
+                            <input id="current_employer" type="text" name="current_employer" value="{{ old('current_employer') }}" maxlength="120"
+                                   class="input {{ $errors->has('current_employer') ? 'input-invalid' : '' }}">
+                            @error('current_employer') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="current_job_title" class="label">Current job title</label>
+                            <input id="current_job_title" type="text" name="current_job_title" value="{{ old('current_job_title') }}" maxlength="120"
+                                   class="input {{ $errors->has('current_job_title') ? 'input-invalid' : '' }}">
+                            @error('current_job_title') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="expected_salary" class="label">Expected salary (MMK)</label>
+                            <input id="expected_salary" type="number" name="expected_salary" value="{{ old('expected_salary') }}" min="0" step="0.01"
+                                   placeholder="e.g. 500000"
+                                   class="input {{ $errors->has('expected_salary') ? 'input-invalid' : '' }}">
+                            @error('expected_salary') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="start_date" class="label">Earliest start date</label>
+                            <input id="start_date" type="date" name="start_date" value="{{ old('start_date') }}"
+                                   class="input {{ $errors->has('start_date') ? 'input-invalid' : '' }}">
+                            @error('start_date') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="languages" class="label">Languages spoken</label>
+                            <input id="languages" type="text" name="languages" value="{{ old('languages') }}" maxlength="255"
+                                   placeholder="e.g. Myanmar, English, Chinese"
+                                   class="input {{ $errors->has('languages') ? 'input-invalid' : '' }}">
+                            @error('languages') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="portfolio_url" class="label">Portfolio / LinkedIn URL</label>
+                            <input id="portfolio_url" type="url" name="portfolio_url" value="{{ old('portfolio_url') }}" maxlength="255"
+                                   placeholder="https://linkedin.com/in/yourprofile"
+                                   class="input {{ $errors->has('portfolio_url') ? 'input-invalid' : '' }}">
+                            @error('portfolio_url') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="skills" class="label">Skills & certifications</label>
+                            <textarea id="skills" name="skills" rows="3" maxlength="2000"
+                                      placeholder="List relevant skills, tools, licenses or certificates."
+                                      class="input {{ $errors->has('skills') ? 'input-invalid' : '' }}">{{ old('skills') }}</textarea>
+                            <p class="help-text">Optional &middot; up to 2,000 characters</p>
+                            @error('skills') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
                     </div>
                 </fieldset>
 
                 {{-- Section: Documents --}}
                 <fieldset>
                     <legend class="font-display text-lg font-semibold text-slate-900 flex items-center gap-2">
-                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold">2</span>
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold">3</span>
                         Documents
                     </legend>
                     <p class="mt-1 text-sm text-slate-500">Upload your photo and NRC scan (both optional but recommended).</p>
@@ -177,7 +341,7 @@
                 {{-- Section: Background --}}
                 <fieldset>
                     <legend class="font-display text-lg font-semibold text-slate-900 flex items-center gap-2">
-                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold">3</span>
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-100 text-brand-700 text-sm font-semibold">4</span>
                         Background
                     </legend>
                     <p class="mt-1 text-sm text-slate-500">Help us understand your experience and motivation.</p>
@@ -199,6 +363,15 @@
                                       class="input">{{ old('education') }}</textarea>
                             <p class="help-text">Optional &middot; up to 5,000 characters</p>
                             @error('education') <p class="error-text" role="alert">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label for="references" class="label">References</label>
+                            <textarea id="references" name="references" rows="4" maxlength="3000"
+                                      placeholder="Name, relationship, and contact details of one or more professional references."
+                                      class="input {{ $errors->has('references') ? 'input-invalid' : '' }}">{{ old('references') }}</textarea>
+                            <p class="help-text">Optional &middot; up to 3,000 characters</p>
+                            @error('references') <p class="error-text" role="alert">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
@@ -235,4 +408,42 @@
             </form>
         </div>
     </section>
+
+    @push('scripts')
+        <script>
+            const nrcTownships = @json($nrcTownships);
+
+            const stateSelect = document.getElementById('nrc_state');
+            const townshipSelect = document.getElementById('nrc_township');
+            const selectedTownship = @json(old('nrc_township'));
+
+            function populateTownships(state) {
+                townshipSelect.innerHTML = '<option value="" disabled selected>Township</option>';
+
+                if (! state || ! nrcTownships[state]) {
+                    return;
+                }
+
+                nrcTownships[state].forEach(function (township) {
+                    const option = document.createElement('option');
+                    option.value = township;
+                    option.textContent = township;
+
+                    if (selectedTownship === township) {
+                        option.selected = true;
+                    }
+
+                    townshipSelect.appendChild(option);
+                });
+            }
+
+            stateSelect.addEventListener('change', function () {
+                populateTownships(this.value);
+            });
+
+            if (stateSelect.value) {
+                populateTownships(stateSelect.value);
+            }
+        </script>
+    @endpush
 </x-layouts.app-public>

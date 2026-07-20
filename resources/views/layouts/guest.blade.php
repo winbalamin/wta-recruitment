@@ -16,7 +16,10 @@
         <header class="border-b border-slate-200 bg-white">
             <div class="container flex items-center h-16">
                 <a href="{{ route('cv.create') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-9 w-auto">
+                    <div class="flex items-center gap-2">
+                        <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-9 w-auto">
+                        <img src="{{ asset('images/WCL_logo.png') }}" alt="WCL Logo" class="h-9 w-auto">
+                    </div>
                     <span class="font-display text-base font-semibold">{{ config('app.name', 'WTA Recruitment') }}</span>
                 </a>
             </div>

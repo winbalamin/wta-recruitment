@@ -18,7 +18,10 @@
     <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
         <div class="container flex items-center justify-between h-16">
             <a href="{{ route('cv.create') }}" class="flex items-center gap-3 group focus-visible:outline-none">
-                <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-9 w-auto transition-transform duration-200 group-hover:scale-105">
+                <div class="flex items-center gap-2">
+                    <img src="{{ asset('images/WinThinLogo.png') }}" alt="WinThin Logo" class="h-9 w-auto transition-transform duration-200 group-hover:scale-105">
+                    <img src="{{ asset('images/WCL_logo.png') }}" alt="WCL Logo" class="h-9 w-auto transition-transform duration-200 group-hover:scale-105">
+                </div>
                 <span class="hidden sm:inline font-display text-base font-semibold text-slate-900">{{ config('app.name', 'WTA Recruitment') }}</span>
             </a>
             <nav class="flex items-center gap-1 sm:gap-2 text-sm">
