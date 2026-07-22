@@ -332,7 +332,7 @@
                             <input id="nrc_file" type="file" name="nrc_file" accept="image/jpeg,image/png,application/pdf"
                                    aria-describedby="nrc-help"
                                    class="block w-full text-sm text-slate-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-brand-50 file:text-brand-700 file:font-semibold hover:file:bg-brand-100 transition-colors duration-200">
-                            <p id="nrc-help" class="help-text">JPG, PNG or PDF &middot; max 4 MB</p>
+                            <p id="nrc-help" class="help-text">JPG, PNG or PDF &middot; max 100 MB</p>
                             @error('nrc_file') <p class="error-text" role="alert">{{ $message }}</p> @enderror
                         </div>
                     </div>

@@ -45,7 +45,7 @@ class StoreCvApplicationRequest extends FormRequest
             'email'                        => ['required', 'string', 'email:rfc', 'max:160'],
             'phone'                        => ['required', 'string', 'regex:/^[0-9+\-\s()]{6,40}$/'],
             'photo'                        => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
-            'nrc_file'                     => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:4096'],
+            'nrc_file'                     => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:102400'],
             'work_experience'              => ['nullable', 'string', 'max:5000'],
             'skills'                       => ['nullable', 'string', 'max:2000'],
             'languages'                    => ['nullable', 'string', 'max:255'],
@@ -83,7 +83,7 @@ class StoreCvApplicationRequest extends FormRequest
             'photo.mimes'          => 'Photo must be a JPG, JPEG, or PNG image.',
             'photo.max'            => 'Photo must not be larger than 2 MB.',
             'nrc_file.mimes'       => 'NRC attachment must be a JPG, JPEG, PNG, or PDF file.',
-            'nrc_file.max'         => 'NRC attachment must not be larger than 4 MB.',
+            'nrc_file.max'         => 'NRC attachment must not be larger than 100 MB.',
             'why_join_wta.required'=> 'Please tell us why you want to join WTA.',
             'why_join_wta.min'     => 'Please write at least 20 characters about why you want to join WTA.',
         ];
