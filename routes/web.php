@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ApplicationController as AdminApplicationController;
 use App\Http\Controllers\Admin\ApplicationFileController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CvApplicationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,9 @@ Route::middleware(['auth', 'verified', 'admin'])
         Route::get('/applications/{application}/files/{type}', [ApplicationFileController::class, 'show'])
             ->where('type', 'photo|nrc')
             ->name('applications.files');
+
+        Route::get('/users/create', [AdminUserController::class, 'create'])->name('users.create');
+        Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
     });
 
 require __DIR__.'/auth.php';
